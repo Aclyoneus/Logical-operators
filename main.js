@@ -70,14 +70,12 @@ function convertAmericanToEuropeanFloor(americanFloor) {
     if (americanFloor > 12) {
         return n - 2;
     }
-    if (americanFloor <= 12 && n > 0) {
-        return n - 1
-    }
-    if (americanFloor === 0) {
-        return 0;
+    if (americanFloor > 0) {
+        return n - 1;
     }
     return americanFloor;
 }
 
 // 7
+
 
