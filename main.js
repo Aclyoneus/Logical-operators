@@ -35,7 +35,7 @@ function compareDistanceToMargin(objectA, objectB, margin = 0) {
     if (Math.abs(objectA - objectB) <= margin) {
         return 0;
     }
-    if (objectA > objectB)) {
+    if (objectA > objectB) {
         return 1;
     }
     return -1;
@@ -78,4 +78,56 @@ function convertAmericanToEuropeanFloor(americanFloor) {
 
 // 7
 
+function rockPaperScissorsLizardSpock(playerOne, playerTwo) {
+    function playWithScissors(opponent) {
+        if (opponent === 'lizard' || opponent === 'paper') {
+            return 'Player 1 Won!';
+        }
+        return 'Player 2 Won!';
+    }
 
+    function playWithPaper(opponent) {
+        if (opponent === 'rock' || opponent === 'spock') {
+            return 'Player 1 Won!';
+        }
+        return 'Player 2 Won!';
+    }
+
+    function playWithRock(opponent) {
+        if (opponent === 'lizard' || opponent === 'scissors') {
+            return 'Player 1 Won!';
+        }
+        return 'Player 2 Won!';
+    }
+
+    function playWithLizard(opponent) {
+        if (opponent === 'spock' || opponent === 'paper') {
+            return 'Player 1 Won!';
+        }
+        return 'Player 2 Won!';
+    }
+
+    function playWithSpock(opponent) {
+        if (opponent === 'rock' || opponent === 'scissors') {
+            return 'Player 1 Won!';
+        }
+        return 'Player 2 Won!';
+    }
+
+    if (playerOne === playerTwo) {
+        return 'Draw!';
+    }
+    if (playerOne === 'scissors') {
+        return playWithScissors(playerTwo);
+    }
+    if (playerOne === 'paper') {
+        return playWithPaper(playerTwo);
+    }
+    if (playerOne === 'rock') {
+        return playWithRock(playerTwo);
+    }
+    if (playerOne === 'lizard') {
+        return playWithLizard(playerTwo);
+    }
+    return playWithSpock(playerTwo);
+}
