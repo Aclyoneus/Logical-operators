@@ -43,9 +43,23 @@ function compareDistanceToMargin(objectA, objectB, margin = 0) {
 
 // 4
 
-function _if(bool, func1, func2) {
-    if (bool) {
-        return func1();
+function isTruthyorFalsy(trueOrFalse, functionIfTruthy, functionIfFalsy) {
+    if (trueOrFalse) {
+        return functionIfTruthy();
     }
-    return func2();
+    return functionIfFalsy();
+}
+
+// 5
+
+function rentalCarCost(rentalDays) {
+    const costWithoutDiscount = rentalDays * 40;
+
+    if (rentalDays >= 7) {
+        return costWithoutDiscount - 50;
+    }
+    if (rentalDays >= 3) {
+        return costWithoutDiscount - 20;
+    }
+    return costWithoutDiscount;
 }
