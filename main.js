@@ -1,7 +1,7 @@
 // 1
 
 function isAlarmSet(isEmployed, isOnVacation) {
-    return isEmployed && !isOnVacation
+    return isEmployed && !isOnVacation;
 }
 
 // 2
@@ -43,7 +43,7 @@ function compareDistanceToMargin(objectA, objectB, margin = 0) {
 
 // 4
 
-function isTruthyorFalsy(trueOrFalse, functionIfTruthy, functionIfFalsy) {
+function isTruthyOrFalsy(trueOrFalse, functionIfTruthy, functionIfFalsy) {
     if (trueOrFalse) {
         return functionIfTruthy();
     }
@@ -68,10 +68,10 @@ function rentalCarCost(rentalDays) {
 
 function convertAmericanToEuropeanFloor(americanFloor) {
     if (americanFloor > 12) {
-        return n - 2;
+        return americanFloor - 2;
     }
     if (americanFloor > 0) {
-        return n - 1;
+        return americanFloor - 1;
     }
     return americanFloor;
 }
@@ -130,4 +130,24 @@ function rockPaperScissorsLizardSpock(playerOne, playerTwo) {
         return playWithLizard(playerTwo);
     }
     return playWithSpock(playerTwo);
+}
+
+// 8
+
+function isPasswordLengthCorrect(text) {
+    return text.length >= 8;
+}
+
+function isPasswordContainingCapitalLetter(text) {
+    return /[A-Z]/.test(text);
+}
+
+function isPasswordContainingNumber(text) {
+    return /[0-9]/.test(text);
+}
+
+function isValidPassword(password) {
+    return isPasswordLengthCorrect(password)
+        && isPasswordContainingCapitalLetter(password)
+        && isPasswordContainingNumber(password);
 }
