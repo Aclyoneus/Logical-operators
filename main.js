@@ -134,20 +134,67 @@ function rockPaperScissorsLizardSpock(playerOne, playerTwo) {
 
 // 8
 
-function isPasswordLengthCorrect(text) {
-    return text.length >= 8;
+function isPasswordLengthCorrect(value) {
+    return value.length >= 8;
 }
 
-function isPasswordContainingCapitalLetter(text) {
-    return /[A-Z]/.test(text);
+function isPasswordContainingCapitalLetter(value) {
+    return /[A-Z]/.test(value);
 }
 
-function isPasswordContainingNumber(text) {
-    return /[0-9]/.test(text);
+function isPasswordContainingNumber(value) {
+    return /[0-9]/.test(value);
 }
 
 function isValidPassword(password) {
     return isPasswordLengthCorrect(password)
         && isPasswordContainingCapitalLetter(password)
         && isPasswordContainingNumber(password);
+}
+
+// 9
+
+function isPasswordContainingLowercase(value) {
+    return /[a-z]/.test(value);
+}
+
+function isPasswordContainingSpecialCharacter(value) {
+    return /[^a-zA-Z0-9]/.test(value);
+}
+
+function convertBooleanToNumber(boolean) {
+    return +boolean;
+}
+
+function getPasswordStrength(password) {
+    return convertBooleanToNumber(isPasswordLengthCorrect(password))
+        + convertBooleanToNumber(isPasswordContainingCapitalLetter(password))
+        + convertBooleanToNumber(isPasswordContainingLowercase(password))
+        + convertBooleanToNumber(isPasswordContainingSpecialCharacter(password));
+}
+
+// 10
+
+function discountedPrice(itemValue) {
+    return itemValue - (itemValue * 0.05);
+}
+
+function convertLoyalityPointsToMoney(loyalityPoints) {
+    return loyalityPoints / 100;
+}
+
+function isPackageShipped(isShipped) {
+    if (isShipped) {
+        return 10;
+    }
+    return 0;
+}
+
+function getTotalOrderCost (itemValue, loyalityPoints, isShipped) {
+    if ((discountedPrice(itemValue) - convertLoyalityPointsToMoney(loyalityPoints)) >= 0) {
+    return discountedPrice(itemValue)
+        - convertLoyalityPointsToMoney(loyalityPoints)
+        - isPackageShipped(isShipped);
+    }
+    return discountedPrice(itemValue) - isPackageShipped(isShipped);
 }
