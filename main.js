@@ -190,11 +190,36 @@ function isPackageShipped(isShipped) {
     return 0;
 }
 
-function getTotalOrderCost (itemValue, loyalityPoints, isShipped) {
+function getTotalOrderCost(itemValue, loyalityPoints, isShipped) {
     if ((discountedPrice(itemValue) - convertLoyalityPointsToMoney(loyalityPoints)) >= 0) {
     return discountedPrice(itemValue)
         - convertLoyalityPointsToMoney(loyalityPoints)
         - isPackageShipped(isShipped);
     }
     return discountedPrice(itemValue) - isPackageShipped(isShipped);
+}
+
+// 11
+
+function discountWhenMoreThanMonth(ticketPrice) {
+        return ticketPrice * 0.1;
+}
+
+function chargeIfWeekend(isWeekend) {
+    if (isWeekend) {
+        return 15;
+    }
+}
+
+function getTicketPrice(ticketPrice, daysUntilTheShow, isWeekend) {
+    if (isWeekend && daysUntilTheShow > 30) {
+        return ticketPrice + (chargeIfWeekend(isWeekend) - discountWhenMoreThanMonth(ticketPrice));
+    }
+    if (isWeekend) {
+        return ticketPrice + chargeIfWeekend(isWeekend);
+    }
+    if (daysUntilTheShow > 30) {
+        return ticketPrice - discountWhenMoreThanMonth(daysUntilTheShow);
+    }
+    return ticketPrice;
 }
