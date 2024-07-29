@@ -195,8 +195,7 @@ function getTotalOrderCost(itemValue, loyalityPoints, isShipped) {
     const fullyDiscountedPrice = discountedPrice - discountFromLoyalityPoints;
 
     if (fullyDiscountedPrice >= 0) {
-        return fullyDiscountedPrice
-            - shippingCost;
+        return fullyDiscountedPrice - shippingCost;
     }
     return discountedPrice - shippingCost;
 }
