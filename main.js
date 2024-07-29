@@ -31,11 +31,13 @@ function isOneTruthy(valueOne, valueTwo) {
 
 // 3
 
-function compareDistanceToMargin(objectA, objectB, margin = 0) {
-    if (Math.abs(objectA - objectB) <= margin) {
+function compareDistanceToMargin(numberA, numberB, margin = 0) {
+    const absoluteDistanceBetweenNumbers = Math.abs(numberA - numberB);
+
+    if (absoluteDistanceBetweenNumbers <= margin) {
         return 0;
     }
-    if (objectA > objectB) {
+    if (numberA > numberB) {
         return 1;
     }
     return -1;
@@ -43,7 +45,7 @@ function compareDistanceToMargin(objectA, objectB, margin = 0) {
 
 // 4
 
-function isTruthyOrFalsy(trueOrFalse, functionIfTruthy, functionIfFalsy) {
+function getFunctionIfTruthyOrFunctionIfFalsy(trueOrFalse, functionIfTruthy, functionIfFalsy) {
     if (trueOrFalse) {
         return functionIfTruthy();
     }
@@ -78,42 +80,42 @@ function convertAmericanToEuropeanFloor(americanFloor) {
 
 // 7
 
+function playWithScissors(opponent) {
+    if (opponent === 'lizard' || opponent === 'paper') {
+        return 'Player 1 Won!';
+    }
+    return 'Player 2 Won!';
+}
+
+function playWithPaper(opponent) {
+    if (opponent === 'rock' || opponent === 'spock') {
+        return 'Player 1 Won!';
+    }
+    return 'Player 2 Won!';
+}
+
+function playWithRock(opponent) {
+    if (opponent === 'lizard' || opponent === 'scissors') {
+        return 'Player 1 Won!';
+    }
+    return 'Player 2 Won!';
+}
+
+function playWithLizard(opponent) {
+    if (opponent === 'spock' || opponent === 'paper') {
+        return 'Player 1 Won!';
+    }
+    return 'Player 2 Won!';
+}
+
+function playWithSpock(opponent) {
+    if (opponent === 'rock' || opponent === 'scissors') {
+        return 'Player 1 Won!';
+    }
+    return 'Player 2 Won!';
+}
+
 function rockPaperScissorsLizardSpock(playerOne, playerTwo) {
-    function playWithScissors(opponent) {
-        if (opponent === 'lizard' || opponent === 'paper') {
-            return 'Player 1 Won!';
-        }
-        return 'Player 2 Won!';
-    }
-
-    function playWithPaper(opponent) {
-        if (opponent === 'rock' || opponent === 'spock') {
-            return 'Player 1 Won!';
-        }
-        return 'Player 2 Won!';
-    }
-
-    function playWithRock(opponent) {
-        if (opponent === 'lizard' || opponent === 'scissors') {
-            return 'Player 1 Won!';
-        }
-        return 'Player 2 Won!';
-    }
-
-    function playWithLizard(opponent) {
-        if (opponent === 'spock' || opponent === 'paper') {
-            return 'Player 1 Won!';
-        }
-        return 'Player 2 Won!';
-    }
-
-    function playWithSpock(opponent) {
-        if (opponent === 'rock' || opponent === 'scissors') {
-            return 'Player 1 Won!';
-        }
-        return 'Player 2 Won!';
-    }
-
     if (playerOne === playerTwo) {
         return 'Draw!';
     }
@@ -162,20 +164,16 @@ function isPasswordContainingSpecialCharacter(value) {
     return /[^a-zA-Z0-9]/.test(value);
 }
 
-function convertBooleanToNumber(boolean) {
-    return +boolean;
-}
-
 function getPasswordStrength(password) {
-    return convertBooleanToNumber(isPasswordLengthCorrect(password))
-        + convertBooleanToNumber(isPasswordContainingCapitalLetter(password))
-        + convertBooleanToNumber(isPasswordContainingLowercase(password))
-        + convertBooleanToNumber(isPasswordContainingSpecialCharacter(password));
+    return Number(isPasswordLengthCorrect(password))
+        + Number(isPasswordContainingCapitalLetter(password))
+        + Number(isPasswordContainingLowercase(password))
+        + Number(isPasswordContainingSpecialCharacter(password));
 }
 
 // 10
 
-function discountedPrice(itemValue) {
+function getDiscountedPrice(itemValue) {
     return itemValue - (itemValue * 0.05);
 }
 
@@ -183,7 +181,7 @@ function convertLoyalityPointsToMoney(loyalityPoints) {
     return loyalityPoints / 100;
 }
 
-function isPackageShipped(isShipped) {
+function costIfPackageShipped(isShipped) {
     if (isShipped) {
         return 10;
     }
@@ -191,35 +189,40 @@ function isPackageShipped(isShipped) {
 }
 
 function getTotalOrderCost(itemValue, loyalityPoints, isShipped) {
-    if ((discountedPrice(itemValue) - convertLoyalityPointsToMoney(loyalityPoints)) >= 0) {
-    return discountedPrice(itemValue)
-        - convertLoyalityPointsToMoney(loyalityPoints)
-        - isPackageShipped(isShipped);
+    const discountedPrice = getDiscountedPrice(itemValue);
+    const discountFromLoyalityPoints = convertLoyalityPointsToMoney(loyalityPoints);
+    const shippingCost = costIfPackageShipped(isShipped);
+    const fullyDiscountedPrice = discountedPrice - discountFromLoyalityPoints;
+
+    if (fullyDiscountedPrice >= 0) {
+        return fullyDiscountedPrice
+            - shippingCost;
     }
-    return discountedPrice(itemValue) - isPackageShipped(isShipped);
+    return discountedPrice - shippingCost;
 }
 
 // 11
 
-function discountWhenMoreThanMonth(ticketPrice) {
-        return ticketPrice * 0.1;
+function getDiscountWhenMoreThanMonth(ticketPrice) {
+    return ticketPrice * 0.1;
 }
 
-function chargeIfWeekend(isWeekend) {
+function getAdditionalFeeIfWeekend(isWeekend) {
     if (isWeekend) {
         return 15;
     }
+    return 0;
 }
 
 function getTicketPrice(ticketPrice, daysUntilTheShow, isWeekend) {
     if (isWeekend && daysUntilTheShow > 30) {
-        return ticketPrice + (chargeIfWeekend(isWeekend) - discountWhenMoreThanMonth(ticketPrice));
+        return ticketPrice + (getAdditionalFeeIfWeekend(isWeekend) - getDiscountWhenMoreThanMonth(ticketPrice));
     }
     if (isWeekend) {
-        return ticketPrice + chargeIfWeekend(isWeekend);
+        return ticketPrice + getAdditionalFeeIfWeekend(isWeekend);
     }
     if (daysUntilTheShow > 30) {
-        return ticketPrice - discountWhenMoreThanMonth(daysUntilTheShow);
+        return ticketPrice - getDiscountWhenMoreThanMonth(daysUntilTheShow);
     }
     return ticketPrice;
 }
